@@ -177,7 +177,7 @@ int main() {
 
 		// Render
 		// Clear the colorbuffer
-		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+		glClearColor(0.15f, 0.65f, 1.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT| GL_DEPTH_BUFFER_BIT);
 
 
@@ -201,44 +201,172 @@ int main() {
 	
 
 		glBindVertexArray(VAO);
-	
+
+		//ColorCuerpo
+		GLint colorLoc = glGetUniformLocation(ourShader.Program, "objectColor");
+		glUniform3f(colorLoc, 1.0f, 1.0f, 1.0f); //Gris
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+		//CuerpoPrincipal
 	    model = glm::mat4(1.0f);
-		model = glm::scale(model, glm::vec3(5.0f, 0.1f, 1.0f)); //ancho | Grosor | Profundidad
-		model = glm::translate(model, glm::vec3(0.0f, 0.6f, 0.0f));
+		model = glm::scale(model, glm::vec3(2.5f, 2.0f, 4.5f)); //ancho | Grosor | Profundidad
+		////                                       x      y     z
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 		
+		//ColorPata1
+		colorLoc = glGetUniformLocation(ourShader.Program, "objectColor");
+		glUniform3f(colorLoc, 1.0f, 1.0f, 1.0f); //Gris
 		//Pata1
 		model = glm::mat4(1.0f);
-		model = glm::scale(model, glm::vec3(0.1f, 0.6f, 0.1f)); //Tamaño de la pata
+		//                                ancho | Grosor | Profundidad
+		model = glm::scale(model, glm::vec3(0.55f, 1.0f, 0.5f)); //Tamaño de la pata
 		//                                       x      y     z
-		model = glm::translate(model, glm::vec3(23.0f, -0.4f, 3.0f));//Posicionde la pata
+		model = glm::translate(model, glm::vec3(1.8f, -1.5f, 4.0f));//Posicionde la pata
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 
+		//ColorPata2
+		colorLoc = glGetUniformLocation(ourShader.Program, "objectColor");
+		glUniform3f(colorLoc, 1.0f, 1.0f, 1.0f); //Gris
 		//Pata2
 		model = glm::mat4(1.0f);
-		model = glm::scale(model, glm::vec3(0.1f, 0.6f, 0.1f)); //Tamaño de la pata
+		model = glm::scale(model, glm::vec3(0.55f, 1.0f, 0.5f)); //Tamaño de la pata
 		//                                       x      y     z
-		model = glm::translate(model, glm::vec3(-23.0f, -0.4f, 3.0f));//Posicionde la pata
+		model = glm::translate(model, glm::vec3(-1.8f, -1.5f, 4.0f));//Posicionde la pata
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 
+		//Colorpata3
+		colorLoc = glGetUniformLocation(ourShader.Program, "objectColor");
+		glUniform3f(colorLoc, 1.0f, 1.0f, 1.0f); //Gris
 		//Pata3
 		model = glm::mat4(1.0f);
-		model = glm::scale(model, glm::vec3(0.1f, 0.6f, 0.1f)); //Tamaño de la pata
+		model = glm::scale(model, glm::vec3(0.55f, 1.0f, 0.5f)); //Tamaño de la pata
 		//                                       x      y     z
-		model = glm::translate(model, glm::vec3(-23.0f, -0.4f, -3.0f));//Posicionde la pata
+		model = glm::translate(model, glm::vec3(-1.8f, -1.5f, -4.0f));//Posicionde la pata
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 
+		//Colorpata4
+		colorLoc = glGetUniformLocation(ourShader.Program, "objectColor");
+		glUniform3f(colorLoc, 1.0f, 1.0f, 1.0f); //Gris
 		//Pata4
 		model = glm::mat4(1.0f);
-		model = glm::scale(model, glm::vec3(0.1f, 0.6f, 0.1f)); //Tamaño de la pata
+		model = glm::scale(model, glm::vec3(0.55f, 1.0f, 0.5f)); //Tamaño de la pata
 		//                                       x      y     z
-		model = glm::translate(model, glm::vec3(23.0f, -0.4f, -3.0f));//Posicionde la pata
+		model = glm::translate(model, glm::vec3(1.8f, -1.5f, -4.0f));//Posicionde la pata
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		//ColorPata1UÑA
+		colorLoc = glGetUniformLocation(ourShader.Program, "objectColor");
+		glUniform3f(colorLoc, 0.9f, 0.5f, 0.55f); //Rosita Salmon
+		//Pata1UÑA
+		model = glm::mat4(1.0f);
+		//                                ancho | Grosor | Profundidad
+		model = glm::scale(model, glm::vec3(0.55f, 0.3f, 0.5f)); //Tamaño de la pata
+		//                                       x      y     z
+		model = glm::translate(model, glm::vec3(1.8f, -7.0f, 4.0f));//Posicionde la pata
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		//ColorPata2UÑA
+		colorLoc = glGetUniformLocation(ourShader.Program, "objectColor");
+		glUniform3f(colorLoc, 0.9f, 0.5f, 0.55f); //Rosita Salmon
+		//Pata2UÑA
+		model = glm::mat4(1.0f);
+		//                                ancho | Grosor | Profundidad
+		model = glm::scale(model, glm::vec3(0.55f, 0.3f, 0.5f)); //Tamaño de la pata
+		//                                       x      y     z
+		model = glm::translate(model, glm::vec3(-1.8f, -7.0f, 4.0f));//Posicionde la pata
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		//ColorPata3UÑA
+		colorLoc = glGetUniformLocation(ourShader.Program, "objectColor");
+		glUniform3f(colorLoc, 0.9f, 0.5f, 0.55f); //Rosita Salmon
+		//Pata3UÑA
+		model = glm::mat4(1.0f);
+		//                                ancho | Grosor | Profundidad
+		model = glm::scale(model, glm::vec3(0.55f, 0.3f, 0.5f)); //Tamaño de la pata
+		//                                       x      y     z
+		model = glm::translate(model, glm::vec3(-1.8f, -7.0f, -4.0f));//Posicionde la pata
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		//ColorPata4UÑA
+		colorLoc = glGetUniformLocation(ourShader.Program, "objectColor");
+		glUniform3f(colorLoc, 0.9f, 0.5f, 0.55f); //Rosita Salmon
+		//Pata4UÑA
+		model = glm::mat4(1.0f);
+		//                                ancho | Grosor | Profundidad
+		model = glm::scale(model, glm::vec3(0.55f, 0.3f, 0.5f)); //Tamaño de la pata
+		//                                       x      y     z
+		model = glm::translate(model, glm::vec3(1.8f, -7.0f, -4.0f));//Posicionde la pata
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		//ColorCuello
+		colorLoc = glGetUniformLocation(ourShader.Program, "objectColor");
+		glUniform3f(colorLoc, 1.0f, 1.0f, 1.0f); //Gris
+		//Cuello
+		model = glm::mat4(1.0f);
+		//                                ancho | Grosor | Profundidad
+		model = glm::scale(model, glm::vec3(2.5f, 1.9f, 1.1f)); //Tamaño de la pata
+		//                                       x      y     z
+		model = glm::translate(model, glm::vec3(0.0f, 1.02f, 1.55f));//Posicionde la pata
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		//ColorCabeza
+		colorLoc = glGetUniformLocation(ourShader.Program, "objectColor");
+		glUniform3f(colorLoc, 1.0f, 1.0f, 1.0f); //Gris
+		//Cabeza
+		model = glm::mat4(1.0f);
+		//                                ancho | Grosor | Profundidad
+		model = glm::scale(model, glm::vec3(2.5f, 1.8f, 2.0f)); //Tamaño de la pata
+		//                                       x      y     z
+		model = glm::translate(model, glm::vec3(0.0f, 1.11f, 1.61f));//Posicionde la pata
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		//ColorColaBase
+		colorLoc = glGetUniformLocation(ourShader.Program, "objectColor");
+		glUniform3f(colorLoc, 0.75f, 0.45f, 0.9f); //RosaFuerte
+		//ColaBase
+		model = glm::mat4(1.0f);
+		//                                ancho | Grosor | Profundidad
+		model = glm::scale(model, glm::vec3(0.8f, 0.8f, 0.8f));
+		//                                       x      y     z
+		model = glm::translate(model, glm::vec3(0.0f, 0.5f, -3.5f)); //Posicionde la colabase
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		//ColorColaBase
+		colorLoc = glGetUniformLocation(ourShader.Program, "objectColor");
+		glUniform3f(colorLoc, 0.7f, 0.0f, 0.9f); //RosaFuerte
+		//ColaBase
+		model = glm::mat4(1.0f);
+		//                                ancho | Grosor | Profundidad
+		model = glm::scale(model, glm::vec3(0.8f, 0.8f, 0.8f));
+		//                                       x      y     z
+		model = glm::translate(model, glm::vec3(0.0f, -0.5f, -4.2f)); //Posicionde la colabase
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		//ColorColaBase
+		colorLoc = glGetUniformLocation(ourShader.Program, "objectColor");
+		glUniform3f(colorLoc, 0.75f, 0.45f, 0.9f); //RosaFuerte
+		//ColaBase
+		model = glm::mat4(1.0f);
+		//                                ancho | Grosor | Profundidad
+		model = glm::scale(model, glm::vec3(0.8f, 0.8f, 0.8f));
+		//                                       x      y     z
+		model = glm::translate(model, glm::vec3(0.0f, -1.5f, -4.2f)); //Posicionde la colabase
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
 
 		glBindVertexArray(0);
 		// Swap the screen buffers
