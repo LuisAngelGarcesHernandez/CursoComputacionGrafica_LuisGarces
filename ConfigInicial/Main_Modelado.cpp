@@ -1,6 +1,6 @@
-//Previo #4
+//Practica #4
 //Garcés Hernández Luis Angel
-//Fecha de Entrega: 07/09/2026
+//Fecha de Entrega: 13/09/2026
 //NCuenta: 31919948-8
 
 #include<iostream>
@@ -39,7 +39,7 @@ int main() {
 
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
-	GLFWwindow *window = glfwCreateWindow(WIDTH, HEIGHT, "Modelado geometrico Previo#4 Garces Hernandez Luis Angel", nullptr, nullptr);
+	GLFWwindow *window = glfwCreateWindow(WIDTH, HEIGHT, "Modelado geometrico Practica#4 Garces Hernandez Luis Angel", nullptr, nullptr);
 
 	int screenWidth, screenHeight;
 
@@ -258,7 +258,9 @@ int main() {
 		model = glm::translate(model, glm::vec3(1.8f, -1.5f, -4.0f));//Posicionde la pata
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glDrawArrays(GL_TRIANGLES, 0, 36);
-
+// 
+//		//////////////////////////////////////////////////////////////
+// 
 		//ColorPata1UÑA
 		colorLoc = glGetUniformLocation(ourShader.Program, "objectColor");
 		glUniform3f(colorLoc, 0.9f, 0.5f, 0.55f); //Rosita Salmon
@@ -306,7 +308,9 @@ int main() {
 		model = glm::translate(model, glm::vec3(1.8f, -7.0f, -4.0f));//Posicionde la pata
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glDrawArrays(GL_TRIANGLES, 0, 36);
-
+// 
+////////////////////////////////////////////////////////////
+ 
 		//ColorCuello
 		colorLoc = glGetUniformLocation(ourShader.Program, "objectColor");
 		glUniform3f(colorLoc, 1.0f, 1.0f, 1.0f); //Gris
@@ -319,6 +323,8 @@ int main() {
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 
+//		///////////////////////////////////////////////////////
+ 
 		//ColorCabeza
 		colorLoc = glGetUniformLocation(ourShader.Program, "objectColor");
 		glUniform3f(colorLoc, 1.0f, 1.0f, 1.0f); //Gris
@@ -330,7 +336,9 @@ int main() {
 		model = glm::translate(model, glm::vec3(0.0f, 1.11f, 1.61f));//Posicionde la pata
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glDrawArrays(GL_TRIANGLES, 0, 36);
-
+// 
+//		///////////////////////////////////////////////////////////////
+// 
 		//ColorColaBase
 		colorLoc = glGetUniformLocation(ourShader.Program, "objectColor");
 		glUniform3f(colorLoc, 0.75f, 0.45f, 0.9f); //RosaFuerte
@@ -339,10 +347,10 @@ int main() {
 		//                                ancho | Grosor | Profundidad
 		model = glm::scale(model, glm::vec3(0.8f, 0.8f, 0.8f));
 		//                                       x      y     z
-		model = glm::translate(model, glm::vec3(0.0f, 0.5f, -3.5f)); //Posicionde la colabase
+		model = glm::translate(model, glm::vec3(0.0f, 0.5f, -3.3f)); //Posicionde la colabase
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glDrawArrays(GL_TRIANGLES, 0, 36);
-
+//
 		//ColorColaBase
 		colorLoc = glGetUniformLocation(ourShader.Program, "objectColor");
 		glUniform3f(colorLoc, 0.7f, 0.0f, 0.9f); //RosaFuerte
@@ -366,11 +374,489 @@ int main() {
 		model = glm::translate(model, glm::vec3(0.0f, -1.5f, -4.2f)); //Posicionde la colabase
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glDrawArrays(GL_TRIANGLES, 0, 36);
+//
+// 		/////////////////////////////////////////////////////////////////////
+// 
+		//ColorOjoDerecho
+		colorLoc = glGetUniformLocation(ourShader.Program, "objectColor");
+		glUniform3f(colorLoc, 0.0f, 0.2f, 0.8f); //AzulOscuro
+		//OjoDerecho
+		model = glm::mat4(1.0f);
+		//                                ancho | Grosor | Profundidad
+		model = glm::scale(model, glm::vec3(0.3f, 0.4f, 0.4f));
+		//                                       x      y     z
+		model = glm::translate(model, glm::vec3(4.26f, 5.0f, 8.2f)); //Posicionde el ojo
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		//ColorBrilloOjoDerecho
+		colorLoc = glGetUniformLocation(ourShader.Program, "objectColor");
+		glUniform3f(colorLoc, 0.0f, 1.0f, 1.0f); //Cian
+		//BrilloOjoDerecho
+		model = glm::mat4(1.0f);
+		//                                ancho | Grosor | Profundidad
+		model = glm::scale(model, glm::vec3(0.15f, 0.2f, 0.2f));
+		//                                       x      y     z
+		model = glm::translate(model, glm::vec3(8.5f, 9.5f, 15.0f)); //Posicionde el brillo
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+//
+//
+		//ColorOjoIzquierdo
+		colorLoc = glGetUniformLocation(ourShader.Program, "objectColor");
+		glUniform3f(colorLoc, 0.0f, 0.2f, 0.8f); //AzulOscuro
+		//OjoIzquierdo
+		model = glm::mat4(1.0f);
+		//                                ancho | Grosor | Profundidad
+		model = glm::scale(model, glm::vec3(0.3f, 0.4f, 0.4f));
+		//                                       x      y     z
+		model = glm::translate(model, glm::vec3(-4.26f, 5.0f, 8.2f)); //Posicionde el ojo
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		//ColorBrilloOjoIzquierdo
+		colorLoc = glGetUniformLocation(ourShader.Program, "objectColor");
+		glUniform3f(colorLoc, 0.0f, 1.0f, 1.0f); //Cian
+		//BrilloOjoIzquierdo
+		model = glm::mat4(1.0f);
+		//                                ancho | Grosor | Profundidad
+		model = glm::scale(model, glm::vec3(0.15f, 0.2f, 0.2f));
+		//                                       x      y     z
+		model = glm::translate(model, glm::vec3(-8.5f, 9.5f, 15.0f)); //Posicionde el brillo
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+// 
+// 		   /////////////////////////////////////////////////////////
+//
+		//ColorOrejaDerecha
+		colorLoc = glGetUniformLocation(ourShader.Program, "objectColor");
+		glUniform3f(colorLoc, 1.0f, 1.0f, 1.0f); //Blanco
+		//OrejaDerecha
+		model = glm::mat4(1.0f);
+		//                                ancho | Grosor | Profundidad
+		model = glm::scale(model, glm::vec3(0.4f, 0.6f, 0.4f));
+		//                                       x      y     z
+		model = glm::translate(model, glm::vec3(2.0f, 5.0f, 7.0f)); //Posicionde la oreja
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		//ColorOrejaIzquierda
+		colorLoc = glGetUniformLocation(ourShader.Program, "objectColor");
+		glUniform3f(colorLoc, 1.0f, 1.0f, 1.0f); //Blanco
+		//OrejaIzquierda
+		model = glm::mat4(1.0f);
+		//                                ancho | Grosor | Profundidad
+		model = glm::scale(model, glm::vec3(0.4f, 0.6f, 0.4f));
+		//                                       x      y     z
+		model = glm::translate(model, glm::vec3(-2.0f, 5.0f, 7.0f)); //Posicionde la oreja
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+//
+// 		   ///////////////////////////////////////////////////////////
+// 
+		//ColorCuernoBase
+		colorLoc = glGetUniformLocation(ourShader.Program, "objectColor");
+		glUniform3f(colorLoc, 0.9f, 0.2f, 0.8f); //RosaFuerte
+		//CuernoBase
+		model = glm::mat4(1.0f);
+		//                                ancho | Grosor | Profundidad
+		model = glm::scale(model, glm::vec3(0.6f, 0.4f, 0.6f));
+		//                                       x      y     z
+		model = glm::translate(model, glm::vec3(0.0f, 7.75f, 6.3f)); //Posicionde la base
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+//
+		//ColorCuernoMedio
+		colorLoc = glGetUniformLocation(ourShader.Program, "objectColor");
+		glUniform3f(colorLoc, 0.75f, 0.45f, 0.9f); //MoradoClaro
+		//CuernoMedio
+		model = glm::mat4(1.0f);
+		//                                ancho | Grosor | Profundidad
+		model = glm::scale(model, glm::vec3(0.4f, 0.4f, 0.4f));
+		//                                       x      y     z
+		model = glm::translate(model, glm::vec3(0.0f, 8.75f, 9.5f)); //Posicion del medio
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		//ColorCuernoPunta
+		colorLoc = glGetUniformLocation(ourShader.Program, "objectColor");
+		glUniform3f(colorLoc, 1.0f, 0.9f, 0.95f); //RosaPalido
+		//CuernoPunta
+		model = glm::mat4(1.0f);
+		//                                ancho | Grosor | Profundidad
+		model = glm::scale(model, glm::vec3(0.2f, 0.4f, 0.2f));
+		//                                       x      y     z
+		model = glm::translate(model, glm::vec3(0.0f, 9.75f, 19.0f)); //Posicionde la punta
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+// 
+// 		   //////////////////////////////////////////////////////////////
+//
+		//ColorCabelloArriba
+		colorLoc = glGetUniformLocation(ourShader.Program, "objectColor");
+		glUniform3f(colorLoc, 0.9f, 0.2f, 0.8f); //RosaFuerte
+		//CabelloArriba
+		model = glm::mat4(1.0f);
+		//                                ancho | Grosor | Profundidad
+		model = glm::scale(model, glm::vec3(0.6f, 0.6f, 0.6f));
+		//                                       x      y     z
+		model = glm::translate(model, glm::vec3(0.0f, 5.16f, 4.5f)); //Posicionde cabello
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+//
+		//ColorCabelloMedio
+		colorLoc = glGetUniformLocation(ourShader.Program, "objectColor");
+		glUniform3f(colorLoc, 0.75f, 0.45f, 0.9f); //MoradoClaro
+		//CabelloMedio
+		model = glm::mat4(1.0f);
+		//                                ancho | Grosor | Profundidad
+		model = glm::scale(model, glm::vec3(0.6f, 0.6f, 0.6f));
+		//                                       x      y     z
+		model = glm::translate(model, glm::vec3(0.0f, 5.5f, 3.5f)); //Posicionde cabello
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+//
+		//ColorCabelloMedioAtras
+		colorLoc = glGetUniformLocation(ourShader.Program, "objectColor");
+		glUniform3f(colorLoc, 0.9f, 0.2f, 0.8f); //RosaFuerte
+		//CabelloArriba
+		model = glm::mat4(1.0f);
+		//                                ancho | Grosor | Profundidad
+		model = glm::scale(model, glm::vec3(0.6f, 0.6f, 0.6f));
+		//                                       x      y     z
+		model = glm::translate(model, glm::vec3(0.0f, 5.16f, 2.5f)); //Posicionde cabello
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+//
+		//ColorCabelloMedioAtrasAbajo
+		colorLoc = glGetUniformLocation(ourShader.Program, "objectColor");
+		glUniform3f(colorLoc, 0.75f, 0.45f, 0.9f); //MoradoClaro
+		//CabelloMedio
+		model = glm::mat4(1.0f);
+		//                                ancho | Grosor | Profundidad
+		model = glm::scale(model, glm::vec3(0.6f, 0.6f, 0.6f));
+		//                                       x      y     z
+		model = glm::translate(model, glm::vec3(0.0f, 5.0f, 1.5f)); //Posicionde cabello
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		//ColorCabelloAbajoPrimero
+		colorLoc = glGetUniformLocation(ourShader.Program, "objectColor");
+		glUniform3f(colorLoc, 0.9f, 0.2f, 0.8f); //RosaFuerte
+		//CabelloArriba
+		model = glm::mat4(1.0f);
+		//                                ancho | Grosor | Profundidad
+		model = glm::scale(model, glm::vec3(0.6f, 0.6f, 0.9f));
+		//                                       x      y     z
+		model = glm::translate(model, glm::vec3(0.0f, 4.0f, 1.0f)); //Posicionde cabello
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+//
+//
+		//ColorCabelloAbajoMedio
+		colorLoc = glGetUniformLocation(ourShader.Program, "objectColor");
+		glUniform3f(colorLoc, 0.75f, 0.45f, 0.9f); //MoradoClaro
+		//CabelloArriba
+		model = glm::mat4(1.0f);
+		//                                ancho | Grosor | Profundidad
+		model = glm::scale(model, glm::vec3(0.6f, 0.6f, 1.2f));
+		//                                       x      y     z
+		model = glm::translate(model, glm::vec3(0.0f, 3.0f, 0.7f)); //Posicionde cabello
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		//ColorCabelloAbajoAbajo
+		colorLoc = glGetUniformLocation(ourShader.Program, "objectColor");
+		glUniform3f(colorLoc, 0.9f, 0.2f, 0.8f); //RosaFuerte
+		//CabelloArriba
+		model = glm::mat4(1.0f);
+		//                                ancho | Grosor | Profundidad
+		model = glm::scale(model, glm::vec3(0.6f, 0.6f, 1.3f));
+		//                                       x      y     z
+		model = glm::translate(model, glm::vec3(0.0f, 2.0f, 0.5f)); //Posicionde cabello
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+ 
+// 		   ////////////////////////////////////////////////
+//
+		//ColorAlaDerechaBase
+		colorLoc = glGetUniformLocation(ourShader.Program, "objectColor");
+		glUniform3f(colorLoc, 0.4f, 0.9f, 1.0f); //AzulClaro
+		//AlaDerechaBase
+		model = glm::mat4(1.0f);
+		//                                ancho | Grosor | Profundidad
+		model = glm::scale(model, glm::vec3(0.3f, 0.4f, 2.0f));
+		//                                       x      y     z
+		model = glm::translate(model, glm::vec3(3.0f, 4.9f, -0.4f)); //Posicionde ala
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		//ColorAlaDerechaPunta
+		colorLoc = glGetUniformLocation(ourShader.Program, "objectColor");
+		glUniform3f(colorLoc, 0.4f, 0.9f, 1.0f); //AzulClaro
+		//AlaDerechaPunta
+		model = glm::mat4(1.0f);
+		//                                ancho | Grosor | Profundidad
+		model = glm::scale(model, glm::vec3(0.3f, 1.2f, 0.4f));
+		//                                       x      y     z
+		model = glm::translate(model, glm::vec3(3.0f, 1.3f, 1.0f)); //Posicionde ala
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+//
+// 
+		//ColorAlaIzquierdaBase
+		colorLoc = glGetUniformLocation(ourShader.Program, "objectColor");
+		glUniform3f(colorLoc, 0.4f, 0.9f, 1.0f); //AzulClaro
+		//AlaIzquierdaBase
+		model = glm::mat4(1.0f);
+		//                                ancho | Grosor | Profundidad
+		model = glm::scale(model, glm::vec3(0.3f, 0.4f, 2.0f));
+		//                                       x      y     z
+		model = glm::translate(model, glm::vec3(-3.0f, 4.9f, -0.4f)); //Posicionde ala
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		//ColorAlaIzquierdaPunta
+		colorLoc = glGetUniformLocation(ourShader.Program, "objectColor");
+		glUniform3f(colorLoc, 0.4f, 0.9f, 1.0f); //AzulClaro
+		//AlaIzquierdaPunta
+		model = glm::mat4(1.0f);
+		//                                ancho | Grosor | Profundidad
+		model = glm::scale(model, glm::vec3(0.3f, 1.2f, 0.4f));
+		//                                       x      y     z
+		model = glm::translate(model, glm::vec3(-3.0f, 1.3f, 1.0f)); //Posicionde ala
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+//
+// /////////////////////////////////////////////////////////////////77
+// 
+		//ColorAlaDerechaInterior
+		colorLoc = glGetUniformLocation(ourShader.Program, "objectColor");
+		glUniform3f(colorLoc, 1.0f, 1.0f, 1.0f); //Blanco
+		//AlaDerechaInterior
+		model = glm::mat4(1.0f);
+		//                                ancho | Grosor | Profundidad
+		model = glm::scale(model, glm::vec3(0.25f, 0.8f, 1.4f));
+		//                                       x      y     z
+		model = glm::translate(model, glm::vec3(3.6f, 1.7f, -0.3f)); //Posicion del interior del ala
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		//ColorAlaDerechaInteriorArriba
+		colorLoc = glGetUniformLocation(ourShader.Program, "objectColor");
+		glUniform3f(colorLoc, 0.8f, 0.8f, 0.8f); //Blanco
+		//AlaDerechaInterior
+		model = glm::mat4(1.0f);
+		//                                ancho | Grosor | Profundidad
+		model = glm::scale(model, glm::vec3(0.3f, 0.5f, 0.5f));
+		//                                       x      y     z
+		model = glm::translate(model, glm::vec3(3.2f, 3.0f, -2.5f)); //Posicion del interior del ala
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		//ColorAlaIzquierdaInterior
+		colorLoc = glGetUniformLocation(ourShader.Program, "objectColor");
+		glUniform3f(colorLoc, 1.0f, 1.0f, 1.0f); //Blanco
+		//AlaDerechaInterior
+		model = glm::mat4(1.0f);
+		//                                ancho | Grosor | Profundidad
+		model = glm::scale(model, glm::vec3(0.25f, 0.8f, 1.4f));
+		//                                       x      y     z
+		model = glm::translate(model, glm::vec3(-3.6f, 1.7f, -0.3f)); //Posicion del interior del ala
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		//ColorAlaIzquierdaInteriorArriba
+		colorLoc = glGetUniformLocation(ourShader.Program, "objectColor");
+		glUniform3f(colorLoc, 0.8f, 0.8f, 0.8f); //Blanco
+		//AlaDerechaInterior
+		model = glm::mat4(1.0f);
+		//                                ancho | Grosor | Profundidad
+		model = glm::scale(model, glm::vec3(0.3f, 0.5f, 0.5f));
+		//                                       x      y     z
+		model = glm::translate(model, glm::vec3(-3.2f, 3.0f, -2.5f)); //Posicion del interior del ala
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+//
+// //////////////////////////////////////////////////////////////
+// 
+		//ColorNarizDerecha
+		colorLoc = glGetUniformLocation(ourShader.Program, "objectColor");
+		glUniform3f(colorLoc, 0.9f, 0.1f, 0.1f); //Rojo
+		//NarizDerecha
+		model = glm::mat4(1.0f);
+		//                                ancho | Grosor | Profundidad
+		model = glm::scale(model, glm::vec3(0.3f, 0.8f, 0.3f));
+		//                                       x      y     z
+		model = glm::translate(model, glm::vec3(2.3f, 2.5f, 13.8f)); //Posicion de la nariz
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		//ColorNarizDerechaizquierda
+		colorLoc = glGetUniformLocation(ourShader.Program, "objectColor");
+		glUniform3f(colorLoc, 0.84f, 0.48f, 0.51f); //Rojo
+		//NarizDerecha
+		model = glm::mat4(1.0f);
+		//                                ancho | Grosor | Profundidad
+		model = glm::scale(model, glm::vec3(0.3f, 0.8f, 0.3f));
+		//                                       x      y     z
+		model = glm::translate(model, glm::vec3(1.4f, 2.5f, 13.75f)); //Posicion de la nariz
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+
+		//ColorNarizDerecha
+		colorLoc = glGetUniformLocation(ourShader.Program, "objectColor");
+		glUniform3f(colorLoc, 0.84f, 0.48f, 0.51f); //Rojo
+		//NarizDerecha
+		model = glm::mat4(1.0f);
+		//                                ancho | Grosor | Profundidad
+		model = glm::scale(model, glm::vec3(0.3f, 0.8f, 0.3f));
+		//                                       x      y     z
+		model = glm::translate(model, glm::vec3(-2.3f, 2.5f, 13.8f)); //Posicion de la nariz
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		//ColorNarizDerechaizquierda
+		colorLoc = glGetUniformLocation(ourShader.Program, "objectColor");
+		glUniform3f(colorLoc, 0.9f, 0.1f, 0.1f); //Rojo
+		//NarizDerecha
+		model = glm::mat4(1.0f);
+		//                                ancho | Grosor | Profundidad
+		model = glm::scale(model, glm::vec3(0.3f, 0.8f, 0.3f));
+		//                                       x      y     z
+		model = glm::translate(model, glm::vec3(-1.4f, 2.5f, 13.75f)); //Posicion de la nariz
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+//
+// //////////////////////////////////////////////////////////7
+// 
+		//ColorMarcaDerechaAbajo1
+		colorLoc = glGetUniformLocation(ourShader.Program, "objectColor");
+		glUniform3f(colorLoc, 0.75f, 0.45f, 0.9f); //MoradoClaro
+		//MarcaDerechaAbajo1
+		model = glm::mat4(1.0f);
+		//                                ancho | Grosor | Profundidad
+		model = glm::scale(model, glm::vec3(0.4f, 0.4f, 0.4f));
+		//                                       x      y     z
+		model = glm::translate(model, glm::vec3(2.7f, -1.1f, -2.5f)); //Posicion de la marca
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		//ColorMarcaDerechaAbajo2
+		colorLoc = glGetUniformLocation(ourShader.Program, "objectColor");
+		glUniform3f(colorLoc, 0.75f, 0.45f, 0.9f); //MoradoClaro
+		//MarcaDerechaAbajo2
+		model = glm::mat4(1.0f);
+		//                                ancho | Grosor | Profundidad
+		model = glm::scale(model, glm::vec3(0.4f, 0.4f, 0.4f));
+		//                                       x      y     z
+		model = glm::translate(model, glm::vec3(2.7f, -1.1f, 0.0f)); //Posicion de la marca
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		//ColorMarcaDerechaAbajo3
+		colorLoc = glGetUniformLocation(ourShader.Program, "objectColor");
+		glUniform3f(colorLoc, 0.75f, 0.45f, 0.9f); //MoradoClaro
+		//MarcaDerechaAbajo3
+		model = glm::mat4(1.0f);
+		//                                ancho | Grosor | Profundidad
+		model = glm::scale(model, glm::vec3(0.4f, 0.4f, 0.4f));
+		//                                       x      y     z
+		model = glm::translate(model, glm::vec3(2.7f, -1.1f, 2.5f)); //Posicion de la marca
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		//ColorMarcaDerechaArriba1
+		colorLoc = glGetUniformLocation(ourShader.Program, "objectColor");
+		glUniform3f(colorLoc, 0.75f, 0.45f, 0.9f); //MoradoClaro
+		//MarcaDerechaArriba1
+		model = glm::mat4(1.0f);
+		//                                ancho | Grosor | Profundidad
+		model = glm::scale(model, glm::vec3(0.4f, 0.4f, 0.4f));
+		//                                       x      y     z
+		model = glm::translate(model, glm::vec3(2.7f, 0.7f, 1.6f)); //Posicion de la marca
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		//ColorMarcaDerechaArriba2
+		colorLoc = glGetUniformLocation(ourShader.Program, "objectColor");
+		glUniform3f(colorLoc, 0.75f, 0.45f, 0.9f); //MoradoClaro
+		//MarcaDerechaArriba2
+		model = glm::mat4(1.0f);
+		//                                ancho | Grosor | Profundidad
+		model = glm::scale(model, glm::vec3(0.4f, 0.4f, 0.4f));
+		//                                       x      y     z
+		model = glm::translate(model, glm::vec3(2.7f, 0.7f, -0.95f)); //Posicion de la marca
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		//ColorMarcaIZQUIERDAAbajo1
+		colorLoc = glGetUniformLocation(ourShader.Program, "objectColor");
+		glUniform3f(colorLoc, 0.75f, 0.45f, 0.9f); //MoradoClaro
+		//MarcaIZQUIERDAAbajo1
+		model = glm::mat4(1.0f);
+		//                                ancho | Grosor | Profundidad
+		model = glm::scale(model, glm::vec3(0.4f, 0.4f, 0.4f));
+		//                                       x      y     z
+		model = glm::translate(model, glm::vec3(-2.7f, -1.1f, -2.5f)); //Posicion de la marca
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		//ColorMarcaIZQUIERDAAbajo2
+		colorLoc = glGetUniformLocation(ourShader.Program, "objectColor");
+		glUniform3f(colorLoc, 0.75f, 0.45f, 0.9f); //MoradoClaro
+		//MarcaIZQUIERDAAbajo2
+		model = glm::mat4(1.0f);
+		//                                ancho | Grosor | Profundidad
+		model = glm::scale(model, glm::vec3(0.4f, 0.4f, 0.4f));
+		//                                       x      y     z
+		model = glm::translate(model, glm::vec3(-2.7f, -1.1f, 0.0f)); //Posicion de la marca
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		//ColorMarcaIZQUIERDAAbajo3
+		colorLoc = glGetUniformLocation(ourShader.Program, "objectColor");
+		glUniform3f(colorLoc, 0.75f, 0.45f, 0.9f); //MoradoClaro
+		//MarcaIZQUIERDAAbajo3
+		model = glm::mat4(1.0f);
+		//                                ancho | Grosor | Profundidad
+		model = glm::scale(model, glm::vec3(0.4f, 0.4f, 0.4f));
+		//                                       x      y     z
+		model = glm::translate(model, glm::vec3(-2.7f, -1.1f, 2.5f)); //Posicion de la marca
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		//ColorMarcaIZQUIERDAArriba1
+		colorLoc = glGetUniformLocation(ourShader.Program, "objectColor");
+		glUniform3f(colorLoc, 0.75f, 0.45f, 0.9f); //MoradoClaro
+		//MarcaIZQUIERDAArriba1
+		model = glm::mat4(1.0f);
+		//                                ancho | Grosor | Profundidad
+		model = glm::scale(model, glm::vec3(0.4f, 0.4f, 0.4f));
+		//                                       x      y     z
+		model = glm::translate(model, glm::vec3(-2.7f, 0.7f, 1.6f)); //Posicion de la marca
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		//ColorMarcaIZQUIERDAArriba2
+		colorLoc = glGetUniformLocation(ourShader.Program, "objectColor");
+		glUniform3f(colorLoc, 0.75f, 0.45f, 0.9f); //MoradoClaro
+		//MarcaIZQUIERDAArriba2
+		model = glm::mat4(1.0f);
+		//                                ancho | Grosor | Profundidad
+		model = glm::scale(model, glm::vec3(0.4f, 0.4f, 0.4f));
+		//                                       x      y     z
+		model = glm::translate(model, glm::vec3(-2.7f, 0.7f, -0.95f)); //Posicion de la marca
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
 
 
 		glBindVertexArray(0);
+
 		// Swap the screen buffers
 		glfwSwapBuffers(window);
+
 	
 	}
 	glDeleteVertexArrays(1, &VAO);
