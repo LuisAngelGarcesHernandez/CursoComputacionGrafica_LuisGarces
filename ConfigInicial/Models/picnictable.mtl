@@ -1,0 +1,27 @@
+newmtl PopcornMachine_lowSG
+Kd 0.80 0.80 0.80
+map_Kd mesa_color.png
+
+newmtl bear_lowSG
+Kd 0.80 0.80 0.80
+map_Kd mesa_color.png
+
+newmtl crate_lowSG
+Kd 0.80 0.80 0.80
+map_Kd mesa_color.png
+
+newmtl garbagebag_lowSG
+Kd 0.80 0.80 0.80
+map_Kd mesa_color.png
+
+newmtl initialShadingGroup
+Kd 0.80 0.80 0.80
+map_Kd mesa_color.png
+
+newmtl picnic_lowSG
+Kd 0.80 0.80 0.80
+map_Kd mesa_color.png
+
+newmtl portadoor_lowSG
+Kd 0.80 0.80 0.80
+map_Kd mesa_color.png

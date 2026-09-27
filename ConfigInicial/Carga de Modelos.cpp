@@ -1,6 +1,6 @@
-//Previo #6
+//Practica #6
 //Garcés Hernández Luis Angel
-// Fecha de Entrega: 21/09/2026
+// Fecha de Entrega: 27/09/2026
 //NCuenta: 31919948-8
 
 
@@ -60,7 +60,7 @@ int main( )
     glfwWindowHint( GLFW_RESIZABLE, GL_FALSE );
     
     // Create a GLFWwindow object that we can use for GLFW's functions
-    GLFWwindow *window = glfwCreateWindow( WIDTH, HEIGHT, "Previo#6 GarcesHernandezLuisAngel Carga de modelos y camara sintetica", nullptr, nullptr );
+    GLFWwindow *window = glfwCreateWindow( WIDTH, HEIGHT, "Practica#6 GarcesHernandezLuisAngel Carga de modelos y camara sintetica", nullptr, nullptr );
     
     if ( nullptr == window )
     {
@@ -101,7 +101,20 @@ int main( )
     
     // Load models
     Model dog((char*)"Models/RedDog.obj");
-    Model springbonnie((char*)"Models/86jfmjiufzv2.obj");
+   /* Model springbonnie((char*)"Models/86jfmjiufzv2.obj");*/
+
+    Model banca((char*)"Models/bench+27.obj");
+
+    Model arbol((char*)"Models/tree_mango_var01.obj");
+
+    Model arbol2((char*)"Models/tree_mango_var02.obj");
+
+    Model mesa((char*)"Models/picnictable.obj");
+
+    Model piso((char*)"Models/hair+grass.obj");
+
+
+
     glm::mat4 projection = glm::perspective( camera.GetZoom( ), ( float )SCREEN_WIDTH/( float )SCREEN_HEIGHT, 0.1f, 100.0f );
     
   
@@ -119,7 +132,7 @@ int main( )
         DoMovement();
 
         // Clear the colorbuffer
-        glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
+        glClearColor(0.4f, 0.7f, 1.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         shader.Use();
@@ -130,22 +143,57 @@ int main( )
 
         // Draw the loaded model (Dog)
         glm::mat4 model(1.0f);
-        model = glm::translate(model, glm::vec3(3.0f, 0.0f, 0.0f));
+        model = glm::translate(model, glm::vec3(0.4f, 0.7f, -0.7f));
         model = glm::scale(model, glm::vec3(2.0f, 2.0f, 2.0f));
         glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
         dog.Draw(shader);
 
-        // Draw the loaded model (Springbonnie)
-        glm::mat4 modelBonnie(1.0f);
+        // Banca
+        glm::mat4 modelBanca(1.0f);
+        modelBanca = glm::translate(modelBanca, glm::vec3(-2.5f, 0.0f, -2.0f));
+        modelBanca = glm::scale(modelBanca, glm::vec3(3.2f, 3.2f, 3.2f));
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(modelBanca));
+        banca.Draw(shader);
 
-        // Lo movemos a la izquierda (-3.0f) y MUCHO más al fondo (-15.0f) para que no te trague
-        modelBonnie = glm::translate(modelBonnie, glm::vec3(-3.0f, 0.0f, -15.0f));
+        //Arbol1
+        glm::mat4 modelArbol(1.0f);
+        modelArbol = glm::translate(modelArbol, glm::vec3(-13.0f, -0.0f, -10.0f));
+        modelArbol = glm::scale(modelArbol, glm::vec3(0.09f, 0.09f, 0.09f));
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(modelArbol));
+        arbol.Draw(shader);
 
-        // Lo hacemos todavía más miniatura
-        modelBonnie = glm::scale(modelBonnie, glm::vec3(0.001f, 0.001f, 0.001f));
+        //Arbol2
+        glm::mat4 modelArbol2(1.0f);
+        modelArbol2 = glm::translate(modelArbol2, glm::vec3(9.0f, -0.1f, -5.0f));
+        modelArbol2 = glm::scale(modelArbol2, glm::vec3(0.09f, 0.09f, 0.09f));
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(modelArbol2));
+        arbol2.Draw(shader);
+        //
+        //Mesa
+        glm::mat4 modelMesa(1.0f);
+        modelMesa = glm::translate(modelMesa, glm::vec3(4.0f, 0.1f, 5.0f));
+        modelMesa = glm::scale(modelMesa, glm::vec3(0.035f, 0.035f, 0.035f));
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(modelMesa));
+        mesa.Draw(shader);
 
-        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(modelBonnie));
-        springbonnie.Draw(shader);
+        //Cesped
+        glm::mat4 modelPiso(1.0f);
+        modelPiso = glm::translate(modelPiso, glm::vec3(0.0f, -0.8f, -5.0f));
+        modelPiso = glm::scale(modelPiso, glm::vec3(30.0f, 4.0f, 30.0f));
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(modelPiso));
+        piso.Draw(shader);
+
+        //// Draw the loaded model (Springbonnie)
+//glm::mat4 modelBonnie(1.0f);
+
+//// Lo movemos a la izquierda (-3.0f) y MUCHO más al fondo (-15.0f) para que no te trague
+//modelBonnie = glm::translate(modelBonnie, glm::vec3(-3.0f, 0.0f, -15.0f));
+
+//// Lo hacemos todavía más miniatura
+//modelBonnie = glm::scale(modelBonnie, glm::vec3(0.001f, 0.001f, 0.001f));
+
+//glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(modelBonnie));
+//springbonnie.Draw(shader);
 
         glfwSwapBuffers(window);
     }
