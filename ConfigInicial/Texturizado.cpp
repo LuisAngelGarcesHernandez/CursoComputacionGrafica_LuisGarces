@@ -1,6 +1,6 @@
-//Previo #7
+//Practica #7
 //Garcés Hernández Luis Angel
-//Fecha de enetrega: 29/09/20266
+//Fecha de enetrega: 03/10/20266
 //NCuenta: 31919948-8
 
 #include <iostream>
@@ -61,7 +61,7 @@ int main()
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
 	// Create a GLFWwindow object that we can use for GLFW's functions
-	GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "Previo 7 Garces Hernandez Luis Angel Texturizado", nullptr, nullptr);
+	GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "Practica 7 Garces Hernandez Luis Angel Texturizado", nullptr, nullptr);
 
 	if (nullptr == window)
 	{
@@ -105,12 +105,53 @@ int main()
 	GLfloat vertices[] =
 	{
 		// Positions            // Colors              // Texture Coords
-		-0.5f, -0.5f, 0.0f,    1.0f, 1.0f,1.0f,		0.0f,0.0f,
-		0.5f, -0.5f, 0.0f,	   1.0f, 1.0f,1.0f,		4.0f,0.0f,
-		0.5f,  0.5f, 0.0f,     1.0f, 1.0f,1.0f,	    4.0f,4.0f,
-		-0.5f,  0.5f, 0.0f,    1.0f, 1.0f,1.0f,		0.0f,4.0f,
+	//Enfrente
+	-0.5f, -0.5f,  0.5f,   1.0f, 1.0f, 1.0f,    0.33f, 0.5f,
+	 0.5f, -0.5f,  0.5f,   1.0f, 1.0f, 1.0f,    0.66f, 0.5f,
+	 0.5f,  0.5f,  0.5f,   1.0f, 1.0f, 1.0f,    0.66f, 0.75f,
+	 0.5f,  0.5f,  0.5f,   1.0f, 1.0f, 1.0f,    0.66f, 0.75f,
+	-0.5f,  0.5f,  0.5f,   1.0f, 1.0f, 1.0f,    0.33f, 0.75f,
+	-0.5f, -0.5f,  0.5f,   1.0f, 1.0f, 1.0f,    0.33f, 0.5f,
 
-		
+	// Izquierda 
+	-0.5f,  0.5f,  0.5f,   1.0f, 1.0f, 1.0f,    0.33f, 0.75f,
+	-0.5f,  0.5f, -0.5f,   1.0f, 1.0f, 1.0f,    0.00f, 0.75f,
+	-0.5f, -0.5f, -0.5f,   1.0f, 1.0f, 1.0f,    0.00f, 0.50f,
+	-0.5f, -0.5f, -0.5f,   1.0f, 1.0f, 1.0f,    0.00f, 0.50f,
+	-0.5f, -0.5f,  0.5f,   1.0f, 1.0f, 1.0f,    0.33f, 0.50f,
+	-0.5f,  0.5f,  0.5f,   1.0f, 1.0f, 1.0f,    0.33f, 0.75f,
+
+	//Atras
+	-0.5f, -0.5f, -0.5f,   1.0f, 1.0f, 1.0f,    0.66f, 0.0f,
+	 0.5f, -0.5f, -0.5f,   1.0f, 1.0f, 1.0f,    0.33f, 0.0f,
+	 0.5f,  0.5f, -0.5f,   1.0f, 1.0f, 1.0f,    0.33f, 0.25f,
+	 0.5f,  0.5f, -0.5f,   1.0f, 1.0f, 1.0f,    0.33f, 0.25f,
+	-0.5f,  0.5f, -0.5f,   1.0f, 1.0f, 1.0f,    0.66f, 0.25f,
+	-0.5f, -0.5f, -0.5f,   1.0f, 1.0f, 1.0f,    0.66f, 0.0f,
+
+	// Derecha
+	 0.5f,  0.5f,  0.5f,   1.0f, 1.0f, 1.0f,    0.66f, 0.75f,
+	 0.5f, -0.5f,  0.5f,   1.0f, 1.0f, 1.0f,    0.66f, 0.50f,
+	 0.5f, -0.5f, -0.5f,   1.0f, 1.0f, 1.0f,    1.0f, 0.50f,
+	 0.5f, -0.5f, -0.5f,   1.0f, 1.0f, 1.0f,    1.0f, 0.50f,
+	 0.5f,  0.5f, -0.5f,   1.0f, 1.0f, 1.0f,    1.0f, 0.75f,
+	 0.5f,  0.5f,  0.5f,   1.0f, 1.0f, 1.0f,    0.66f, 0.75f,
+
+	// Arriba
+	  -0.5f,  0.5f, -0.5f,   1.0f, 1.0f, 1.0f,    0.33f, 1.00f,
+	  0.5f,  0.5f, -0.5f,   1.0f, 1.0f, 1.0f,    0.66f, 1.00f,
+	  0.5f,  0.5f,  0.5f,   1.0f, 1.0f, 1.0f,    0.66f, 0.75f,
+	  0.5f,  0.5f,  0.5f,   1.0f, 1.0f, 1.0f,    0.66f, 0.75f,
+	  -0.5f,  0.5f,  0.5f,   1.0f, 1.0f, 1.0f,    0.33f, 0.75f,
+	  -0.5f,  0.5f, -0.5f,   1.0f, 1.0f, 1.0f,    0.33f, 1.00f,
+
+	  // Inferior
+	  -0.5f, -0.5f, -0.5f,   1.0f, 1.0f, 1.0f,    0.33f, 0.25f,
+	   0.5f, -0.5f, -0.5f,   1.0f, 1.0f, 1.0f,    0.66f, 0.25f,
+	   0.5f, -0.5f,  0.5f,   1.0f, 1.0f, 1.0f,    0.66f, 0.50f,
+	   0.5f, -0.5f,  0.5f,   1.0f, 1.0f, 1.0f,    0.66f, 0.50f,
+	  -0.5f, -0.5f,  0.5f,   1.0f, 1.0f, 1.0f,    0.33f, 0.50f,
+	  -0.5f, -0.5f, -0.5f,   1.0f, 1.0f, 1.0f,    0.33f, 0.25f
 	};
 
 	GLuint indices[] =
@@ -124,13 +165,13 @@ int main()
 	GLuint VBO, VAO,EBO;
 	glGenVertexArrays(1, &VAO);
 	glGenBuffers(1, &VBO);
-	glGenBuffers(1, &EBO);
+	//glGenBuffers(1, &EBO);
 
 	glBindVertexArray(VAO);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+	/*glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);*/
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
 	// Position attribute
@@ -156,13 +197,13 @@ int main()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST_MIPMAP_NEAREST);
 	// Diffuse map
-	image = stbi_load("images/madera.png", &textureWidth, &textureHeight, &nrChannels,0);
+	image = stbi_load("images/dado.png", &textureWidth, &textureHeight, &nrChannels,0);
 	glBindTexture(GL_TEXTURE_2D, texture1);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, textureWidth, textureHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, textureWidth, textureHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
 	glGenerateMipmap(GL_TEXTURE_2D);
 	if (image)
 	{
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, textureWidth, textureHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, textureWidth, textureHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
 		glGenerateMipmap(GL_TEXTURE_2D);
 	}
 	else
@@ -212,6 +253,7 @@ int main()
 		// Draw the light object (using light's vertex attributes)
 		glBindVertexArray(VAO);
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+		glDrawArrays(GL_TRIANGLES, 0, 36);
 		glBindVertexArray(0);
 
 		// Swap the screen buffers
@@ -220,7 +262,7 @@ int main()
 
 	glDeleteVertexArrays(1, &VAO);
 	glDeleteBuffers(1, &VBO);
-	glDeleteBuffers(1, &EBO);
+	/*glDeleteBuffers(1, &EBO);*/
 	// Terminate GLFW, clearing any resources allocated by GLFW.
 	glfwTerminate();
 
