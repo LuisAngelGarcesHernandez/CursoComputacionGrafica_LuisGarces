@@ -1,4 +1,4 @@
-//Practica #7
+//Pr #7
 //Garcés Hernández Luis Angel
 //Fecha de enetrega: 03/10/20266
 //NCuenta: 31919948-8
