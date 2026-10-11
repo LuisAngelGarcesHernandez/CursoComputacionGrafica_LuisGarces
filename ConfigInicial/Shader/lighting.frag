@@ -27,7 +27,7 @@ uniform Material material;
 uniform Light light;
 uniform Light light2;
 
-uniform sampler2D texture_diffusse;
+uniform sampler2D texture_diffuse1;
 
 void main()
 {
@@ -61,6 +61,6 @@ void main()
     
     // Sumamos todo
     vec3 result = (ambient + diffuse + specular) + (ambient2 + diffuse2 + specular2);
-color = vec4(result, 1.0f) * texture(texture_diffusse, TexCoords);
+color = vec4(result, 1.0f) * texture(texture_diffuse1, TexCoords);
     
 }
