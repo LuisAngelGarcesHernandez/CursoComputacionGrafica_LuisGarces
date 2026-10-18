@@ -337,7 +337,8 @@ int main()
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform1i(glGetUniformLocation(lightingShader.Program, "transparency"), 1);
 		Dog.Draw(lightingShader);
-		//glDisable(GL_BLEND);  //Desactiva el canal alfa 
+		//
+		// glDisable(GL_BLEND);  //Desactiva el canal alfa 
 		glBindVertexArray(0);
 
 	

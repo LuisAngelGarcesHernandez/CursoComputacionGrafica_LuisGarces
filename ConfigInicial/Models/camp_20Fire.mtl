@@ -1,0 +1,10 @@
+# Material for Camp+Fire.obj
+# Material used in OBJ: initialShadingGroup
+newmtl initialShadingGroup
+Ka 0.15 0.12 0.09
+Kd 1.0 1.0 1.0
+Ks 0.12 0.12 0.12
+Ns 20.0
+d 1.0
+illum 2
+map_Kd Camp_Fire_Albedo.tga

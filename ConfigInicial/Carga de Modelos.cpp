@@ -1,6 +1,6 @@
-//Practica #8
+//Practica #9
 //Garcés Hernández Luis Angel
-// Fecha de Entrega: 11/10/2026
+// Fecha de Entrega: 18/10/2026
 //NCuenta: 31919948-8
 
 // Std. Includes
@@ -70,7 +70,7 @@ int main( )
     glfwWindowHint( GLFW_RESIZABLE, GL_FALSE );
     
     // Create a GLFWwindow object that we can use for GLFW's functions
-    GLFWwindow *window = glfwCreateWindow( WIDTH, HEIGHT, "Practica#8 GarcesHernandezLuisAngel Materiales e Iluminacion", nullptr, nullptr );
+    GLFWwindow *window = glfwCreateWindow( WIDTH, HEIGHT, "Practica#9 GarcesHernandezLuisAngel Fuentes de Luz", nullptr, nullptr );
     
     if ( nullptr == window )
     {
@@ -129,6 +129,12 @@ int main( )
 
     Model luna((char*)"Models/Moon.obj");
 
+    Model faro((char*)"Models/faro_uno.obj");
+
+    Model fogata((char*)"Models/Camp+Fire.obj");
+
+    Model maquina((char*)"Models/vending_unica.obj");
+
     glm::mat4 projection = glm::perspective( camera.GetZoom( ), ( float )SCREEN_WIDTH/( float )SCREEN_HEIGHT, 0.1f, 100.0f );
     
   
@@ -186,6 +192,15 @@ int main( )
 
         //Iluminacion:
         lightingShader.Use();
+        // Posicion y escala del farol
+        glm::vec3 posicionFaro(2.0f, 0.0f, -4.0f);
+        float escalaFaro = 0.35f;
+        // Posicion y escala de la fogata
+        glm::vec3 posicionFogata(-2.5f, -0.5f, 5.0f);
+        float escalaFogata = 0.6f;
+
+        // Posicion aproximada de las llamas
+        glm::vec3 posicionLuzFogata = posicionFogata + escalaFogata * glm::vec3(0.0f, 2.2f, 0.0f);
 
         //// Posición de las dos luces
         GLint lightPosLoc =glGetUniformLocation(lightingShader.Program,"light.position");
@@ -224,6 +239,78 @@ int main( )
 
         // Luz especular Luna
         glUniform3f(glGetUniformLocation(lightingShader.Program, "light2.specular"),0.40f * intensidadLuna,0.45f * intensidadLuna,0.70f * intensidadLuna);
+
+        // SPOTLIGHT - FAROL
+// Posicion de la fuente luminosa del farol
+        glm::vec3 posicionSpot = posicionFaro + escalaFaro * glm::vec3(0.0f, 19.0f, -2.5f);
+
+        // Posicion
+        glUniform3f(glGetUniformLocation(lightingShader.Program, "spotLight.position"),posicionSpot.x, posicionSpot.y, posicionSpot.z);
+
+        // Direccion hacia abajo
+        glUniform3f(glGetUniformLocation(lightingShader.Program, "spotLight.direction"),0.0f, -1.0f, 0.0f);
+
+        // Luz ambiental
+        glUniform3f(glGetUniformLocation(lightingShader.Program, "spotLight.ambient"),0.03f, 0.025f, 0.01f);
+
+        // Luz difusa amarilla
+        glUniform3f(glGetUniformLocation(lightingShader.Program, "spotLight.diffuse"),1.0f, 0.85f, 0.35f);
+
+        // Luz especular
+        glUniform3f(glGetUniformLocation(lightingShader.Program, "spotLight.specular"),0.8f, 0.7f, 0.3f);
+
+        // Angulo interior del reflector
+        glUniform1f(glGetUniformLocation(lightingShader.Program, "spotLight.cutOff"),glm::cos(glm::radians(20.0f)));
+
+        // Angulo exterior del reflector
+        glUniform1f(glGetUniformLocation(lightingShader.Program, "spotLight.outerCutOff"),glm::cos(glm::radians(28.0f)));
+
+        // Atenuacion
+        glUniform1f(glGetUniformLocation(lightingShader.Program, "spotLight.constant"),1.0f);
+
+        glUniform1f(glGetUniformLocation(lightingShader.Program, "spotLight.linear"),0.045f);
+
+        glUniform1f(glGetUniformLocation(lightingShader.Program, "spotLight.quadratic"),0.0075f);
+
+// POINTLIGHT - FOGATA
+
+// Posicion de la luz
+        glUniform3f(glGetUniformLocation(lightingShader.Program, "pointLightFogata.position"),posicionLuzFogata.x,posicionLuzFogata.y,posicionLuzFogata.z);
+
+        // Luz ambiental naranja tenue
+        glUniform3f(glGetUniformLocation(lightingShader.Program, "pointLightFogata.ambient"),0.035f, 0.03f, 0.01f);
+
+        // Luz difusa naranja
+        glUniform3f(glGetUniformLocation(lightingShader.Program, "pointLightFogata.diffuse"),2.5f, 0.18f, 0.08f);
+
+        // Brillo de la fogata
+        glUniform3f(glGetUniformLocation(lightingShader.Program, "pointLightFogata.specular"),1.4f, 0.20f, 0.10f);
+
+        // Atenuacion constante
+        glUniform1f(glGetUniformLocation(lightingShader.Program, "pointLightFogata.constant"),1.0f);
+
+        // Atenuacion lineal
+        glUniform1f(glGetUniformLocation(lightingShader.Program, "pointLightFogata.linear"),0.09f);
+
+        // Atenuacion cuadratica
+        glUniform1f(glGetUniformLocation(lightingShader.Program, "pointLightFogata.quadratic"),0.032f);
+
+// DIRLIGHT - MAQUINA EXPENDEDORA
+
+// Activar esta luz solamente durante la noche
+        float intensidadDir = solActivo ? 0.0f : 1.0f;
+
+        // Direccion de la iluminacion
+        glUniform3f(glGetUniformLocation(lightingShader.Program, "dirLight.direction"),-0.4f, -1.0f, -0.2f);
+
+        // Luz ambiental
+        glUniform3f(glGetUniformLocation(lightingShader.Program, "dirLight.ambient"),0.01f * intensidadDir,0.03f * intensidadDir,0.15f * intensidadDir);
+
+        // Luz difusa
+        glUniform3f(glGetUniformLocation(lightingShader.Program, "dirLight.diffuse"),0.05f * intensidadDir,0.20f * intensidadDir,1.0f * intensidadDir);
+
+        // Luz especular
+        glUniform3f(glGetUniformLocation(lightingShader.Program, "dirLight.specular"),0.10f * intensidadDir,0.35f * intensidadDir,1.0f * intensidadDir);
 
         //// Material
 
@@ -282,6 +369,52 @@ int main( )
         glUniformMatrix4fv(glGetUniformLocation(lightingShader.Program, "model"), 1, GL_FALSE, glm::value_ptr(modelPiso));
         piso.Draw(lightingShader);
 
+        // FAROL CON SPOTLIGHT
+        glm::mat4 modelFaro(1.0f);
+
+        // Usar la misma posicion que el SpotLight
+        modelFaro = glm::translate(modelFaro,posicionFaro);
+
+        // Usar la misma escala
+        modelFaro = glm::scale(modelFaro,glm::vec3(escalaFaro));
+
+        // Dibujar el farol
+        glUniformMatrix4fv(glGetUniformLocation(lightingShader.Program, "model"),1,GL_FALSE,glm::value_ptr(modelFaro));
+
+        faro.Draw(lightingShader);
+
+// FOGATA CON POINTLIGHT
+
+        glm::mat4 modelFogata(1.0f);
+
+        // Posicion de la fogata
+        modelFogata = glm::translate(modelFogata,posicionFogata);
+
+        // Escala de la fogata
+        modelFogata = glm::scale(modelFogata,glm::vec3(escalaFogata));
+
+        // Enviar matriz
+        glUniformMatrix4fv(glGetUniformLocation(lightingShader.Program, "model"),1,GL_FALSE,glm::value_ptr(modelFogata));
+
+        //Dibujar fogata
+        glUniformMatrix4fv(glGetUniformLocation(lightingShader.Program, "model"),1,GL_FALSE,glm::value_ptr(modelFogata));
+
+        fogata.Draw(lightingShader);
+
+// MAQUINA EXPENDEDORA
+        glm::mat4 modelMaquina(1.0f);
+
+        // Posicion en el parque
+        modelMaquina = glm::translate(modelMaquina,glm::vec3(-13.0f, 0.0f, -0.1f));
+
+        // Escala
+        modelMaquina = glm::scale(modelMaquina,glm::vec3(0.03f));
+
+        // Enviar matriz
+        glUniformMatrix4fv(glGetUniformLocation(lightingShader.Program, "model"),1,GL_FALSE,glm::value_ptr(modelMaquina));
+
+        // Dibujar una sola maquina
+        maquina.Draw(lightingShader);
 
         shader.Use();
 
@@ -289,7 +422,7 @@ int main( )
         glUniformMatrix4fv(glGetUniformLocation(shader.Program, "projection"),1,GL_FALSE,glm::value_ptr(projection));
 
         // Vista
-        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "view"),1,GL_FALSE,glm::value_ptr(view));
+        glUniformMatrix4fv(__glewGetUniformLocation(shader.Program, "view"), 1, GL_FALSE, glm::value_ptr(view));
         // SOL
         glm::mat4 modelSol(1.0f);
         // Su modelo sigue la posicion de su luz
