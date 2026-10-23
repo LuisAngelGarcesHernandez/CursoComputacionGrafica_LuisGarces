@@ -1,6 +1,6 @@
-// Previo #10
+// Practica #10
 // Garcés Hernández Luis Angel
-// Fecha de Entrega: 20/10/2026
+// Fecha de Entrega: 23/10/2026
 // NCuenta: 31919948-8
 
 #include <iostream>
@@ -106,12 +106,21 @@ float vertices[] = {
 glm::vec3 Light1 = glm::vec3(0);
 //Anim
 float rotBall = 0;
+float rotDog = 0.0f;
 bool AnimBall = false;
 
 bool AnimBounce = false;
 float movBallY = 0.15f;
+float movDogY = 0.0f;
 float animTime = 0.0f; // Tiempo para calcular el seno
+bool enContacto = false;
+bool animacionChoque = false;
 
+float tiempoChoque = 0.0f;
+
+// Altura adicional de los saltos
+float saltoPerro = 0.0f;
+float rebotePelota = 0.0f;
 
 // Deltatime
 GLfloat deltaTime = 0.0f;	// Time between current frame and last frame
@@ -129,7 +138,7 @@ int main()
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);*/
 
 	// Create a GLFWwindow object that we can use for GLFW's functions
-	GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "Garces Hernandez Luis Angel Previo #10 Animacion basica", nullptr, nullptr);
+	GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "Garces Hernandez Luis Angel Practica #10 Animacion basica", nullptr, nullptr);
 
 	if (nullptr == window)
 	{
@@ -214,12 +223,7 @@ int main()
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	   
 		// OpenGL options
-		glEnable(GL_DEPTH_TEST);
-
-		
-		
-		
-	
+		glEnable(GL_DEPTH_TEST);	
 
 		// Use cooresponding shader when setting uniforms/drawing objects
 		lightingShader.Use();
@@ -283,66 +287,88 @@ int main()
 		glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
 		glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
 
+		glm::mat4 model(1.0f);
 
-		glm::mat4 model(1);
+		// PISO
 
-	
-		
-		//Carga de modelo 
-        view = camera.GetViewMatrix();	
-		model = glm::mat4(1);
+		model = glm::mat4(1.0f);
+
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "transparency"), 0);
+
 		Piso.Draw(lightingShader);
 
-		model = glm::mat4(1);
+		// PERRO - MOVIMIENTO CIRCULAR
+
+		model = glm::mat4(1.0f);
+
+
+		if (AnimBall)
+		{
+			float radio = 1.30f;
+			float anguloPerro = glm::radians(rotDog);
+
+			float perroX = radio * sin(anguloPerro);
+			float perroZ = radio * cos(anguloPerro);
+
+			model = glm::translate(model,glm::vec3(perroX, saltoPerro, perroZ));
+			// Calcular la posicion actual de la pelota
+			float anguloPelota = glm::radians(rotBall);
+			float pelotaX = 1.65f * sin(anguloPelota);
+			float pelotaZ = 1.65f * cos(anguloPelota);
+
+			// Direccion del perro hacia la pelota
+			float direccionX = pelotaX - perroX;
+			float direccionZ = pelotaZ - perroZ;
+
+			// Angulo necesario para mirar hacia la pelota
+			float orientacion = atan2(direccionX, direccionZ);
+
+			// Girar al perro para que siempre mire a la pelota
+			model = glm::rotate(model, orientacion, glm::vec3(0.0f, 1.0f, 0.0f));
+
+		}
+
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform1i(glGetUniformLocation(lightingShader.Program, "transparency"), 0);
 		Dog.Draw(lightingShader);
 
+		// PELOTA - MOVIMIENTO CIRCULAR
 		model = glm::mat4(1.0f);
+
+
+		if (AnimBall)
+		{
+			float radio = 1.35f;
+			float angulo = glm::radians(rotBall);
+
+			float pelotaX = radio * sin(angulo);
+			float pelotaZ = radio * cos(angulo);
+
+			model = glm::translate(
+				model,
+				glm::vec3(pelotaX, 0.01f + rebotePelota, pelotaZ)
+			);
+		}
+
+
+		else
+		{
+			// Conserva la animacion vertical de M
+			model = glm::translate(model,glm::vec3(0.0f, movBallY, 0.15f));
+		}
 
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-		glUniform1i(
-			glGetUniformLocation(lightingShader.Program, "transparency"),
-			1
-		);
-
-		if (AnimBall)
-		{
-			// N: girar alrededor del perro, mas cerca
-			model = glm::rotate(
-				model,
-				glm::radians(rotBall),
-				glm::vec3(0.0f, 1.0f, 0.0f)
-			);
-
-			model = glm::translate(
-				model,
-				glm::vec3(0.0f, 0.15f, 0.15f)
-			);
-		}
-		else
-		{
-			// M: subir y bajar cerca de la nariz
-			model = glm::translate(
-				model,
-				glm::vec3(0.0f, movBallY, 0.15f)
-			);
-		}
-
-		glUniformMatrix4fv(
-			modelLoc,
-			1,
-			GL_FALSE,
-			glm::value_ptr(model)
-		);
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "transparency"), 1);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 
 		Ball.Draw(lightingShader);
 
 		glDisable(GL_BLEND);
 		glBindVertexArray(0);
+
 	
 		// Also draw the lamp object, again binding the appropriate shader
 		lampShader.Use();
@@ -354,6 +380,9 @@ int main()
 		// Set matrices
 		glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
 		glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
+
+
+		//Piso
 		model = glm::mat4(1);
 		model = glm::translate(model, lightPos);
 		model = glm::scale(model, glm::vec3(0.2f)); // Make it a smaller cube
@@ -368,9 +397,6 @@ int main()
 			glDrawArrays(GL_TRIANGLES, 0, 36);
 		
 		glBindVertexArray(0);
-
-
-
 		// Swap the screen buffers
 		glfwSwapBuffers(window);
 	}
@@ -486,6 +512,7 @@ void KeyCallback(GLFWwindow *window, int key, int scancode, int action, int mode
 		{
 			AnimBounce = false;
 			rotBall = 0.0f;
+			rotDog = 0.0f;
 		}
 	}
 
@@ -499,29 +526,123 @@ void KeyCallback(GLFWwindow *window, int key, int scancode, int action, int mode
 			AnimBall = false;
 			animTime = 0.0f;
 			movBallY = 0.15f;
+			movDogY = 0.0f;
+		}
+		else
+		{
+			movBallY = 0.15f;
+			movDogY = 0.0f;
 		}
 	}
 }
+
+
+
 void Animation()
 {
-	// Animacion N: girar alrededor del perro
 	if (AnimBall)
 	{
-		rotBall += 90.0f * deltaTime;
+		// Movimiento circular en sentidos contrarios
+		rotBall += 55.0f * deltaTime;
+		rotDog -= 55.0f * deltaTime;
 
 		if (rotBall >= 360.0f)
 			rotBall -= 360.0f;
+
+		if (rotDog <= -360.0f)
+			rotDog += 360.0f;
+
+		// POSICIONES DEL PERRO Y LA PELOTA
+
+		float anguloPerro = glm::radians(rotDog);
+		float anguloPelota = glm::radians(rotBall);
+
+		float perroX = 1.30f * sin(anguloPerro);
+		float perroZ = 1.30f * cos(anguloPerro);
+
+		float pelotaX = 1.35f * sin(anguloPelota);
+		float pelotaZ = 1.35f * cos(anguloPelota);
+
+		float dx = pelotaX - perroX;
+		float dz = pelotaZ - perroZ;
+
+		float distancia = sqrt(dx * dx + dz * dz);
+
+		// DETECTAR CADA NUEVO ENCUENTRO
+
+		bool contactoActual = (distancia < 0.35f);
+		//bool contactoActual = false;
+
+		if (contactoActual && !enContacto)
+		{
+			// El perro vuelve a encontrar la pelota
+			animacionChoque = true;
+			tiempoChoque = 0.0f;
+			saltoPerro = 0.0f;
+			rebotePelota = 0.0f;
+		}
+
+		enContacto = contactoActual;
+
+		// SALTO Y REBOTE SINCRONIZADOS
+
+		if (animacionChoque)
+		{
+			tiempoChoque += deltaTime;
+
+			// El perro da un salto corto en cada encuentro
+			float duracionPerro = 0.60f;
+			float progresoPerro = tiempoChoque / duracionPerro;
+
+			if (progresoPerro < 1.0f)
+			{
+				saltoPerro = 0.35f * 4.0f * progresoPerro * (1.0f - progresoPerro);
+			}
+			else
+			{
+				saltoPerro = 0.0f;
+			}
+
+			// Dos objetos girando en sentidos contrarios
+			// a 55 grados/s vuelven a encontrarse
+			// aproximadamente cada 3.27 segundos.
+			float duracionPelota = 360.0f / 110.0f;
+			float progresoPelota = tiempoChoque / duracionPelota;
+
+			if (progresoPelota < 1.0f)
+			{
+				// La pelota permanece elevada mas tiempo
+				float arco = sin(3.14159265f * progresoPelota);
+
+				rebotePelota = 1.25f * sqrt(arco > 0.0f ? arco : 0.0f);
+			}
+			else
+			{
+				rebotePelota = 0.0f;
+animacionChoque = false;
+			}
+		}
+	}
+	else
+	{
+		// Reiniciar saltos cuando N esta desactivada
+		enContacto = false;
+		animacionChoque = false;
+		tiempoChoque = 0.0f;
+		saltoPerro = 0.0f;
+		rebotePelota = 0.0f;
 	}
 
-	// Animacion M: subir y bajar
+	// M: movimiento vertical original
 	if (AnimBounce)
 	{
 		animTime += 3.0f * deltaTime;
-
-		// Movimiento entre Y = 0.3 y Y = 2.0
 		movBallY = 1.075f - 0.925f * cos(animTime);
 	}
 }
+
+
+
 
 void MouseCallback(GLFWwindow *window, double xPos, double yPos)
 {
