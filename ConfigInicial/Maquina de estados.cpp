@@ -1,4 +1,4 @@
-//Practica #11
+// Practica #11
 // Garcés Hernández Luis Angel
 // Fecha de Entrega: 01/11/2026
 // NCuenta: 31919948-8
@@ -591,7 +591,7 @@ void Animation() {
 
 			dogRot = 90.0f;
 			head = 0.0f;
-			dogPos.x += 0.00035f;
+			dogPos.x += 0.00055f;
 		}
 
 		// 5 Se detiene y vuelve a mirar a la izquierda
@@ -610,8 +610,8 @@ void Animation() {
 
 			dogRot += 0.04f;
 
-			dogPos.x += 0.0002f * sin(glm::radians(dogRot));
-			dogPos.z += 0.0002f * cos(glm::radians(dogRot));
+			dogPos.x += 0.0004f * sin(glm::radians(dogRot));
+			dogPos.z += 0.0004f * cos(glm::radians(dogRot));
 
 			head -= 0.02f;
 
@@ -641,7 +641,7 @@ void Animation() {
 			step = false;
 		}
 
-		printf("\n%f", RLegs);
+		//printf("\n%f", RLegs);
 	}
 
 	// Tercer giro y caminata de C hacia D
@@ -684,7 +684,7 @@ void Animation() {
 			// 9. Gira suavemente hacia la derecha
 			else if (dogRot > 90.0f) {
 
-				dogRot -= 0.04f;
+				dogRot -= 0.05f;
 
 				dogPos.x += 0.0002f * sin(glm::radians(dogRot));
 				dogPos.z += 0.0002f * cos(glm::radians(dogRot));
@@ -708,7 +708,7 @@ void Animation() {
 
 			if (dogPos.x < 2.0f) {
 
-				dogPos.x += 0.0003f;
+				dogPos.x += 0.0005f;
 			}
 			else {
 				// Se detiene al llegar a D
@@ -790,8 +790,8 @@ void Animation() {
 					}
 
 					// Avanza hacia E
-					dogPos.x += 0.00045f * sin(glm::radians(dogRot));
-					dogPos.z += 0.00045f * cos(glm::radians(dogRot));
+					dogPos.x += 0.00065f * sin(glm::radians(dogRot));
+					dogPos.z += 0.00065f * cos(glm::radians(dogRot));
 				}
 			}
 			else {
@@ -810,11 +810,11 @@ void Animation() {
 		// 13. En E vuelve a mirar hacia enfrente
 		else if (dogAnim == 7) {
 
-			if (dogRot < -0.04f) {
-				dogRot += 0.04f;
+			if (dogRot < -0.06f) {
+				dogRot += 0.06f;
 			}
 			else if (dogRot > 0.04f) {
-				dogRot -= 0.04f;
+				dogRot -= 0.05f;
 			}
 			else {
 				dogRot = 0.0f;
@@ -825,9 +825,6 @@ void Animation() {
 			}
 		}
 	}
-
-	
-	
 }
 
 void MouseCallback(GLFWwindow *window, double xPos, double yPos)
