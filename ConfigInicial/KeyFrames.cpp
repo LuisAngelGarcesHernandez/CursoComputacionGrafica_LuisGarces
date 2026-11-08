@@ -1,10 +1,11 @@
-// Previo #12
+// Practica #12
 // Garcés Hernández Luis Angel
-// Fecha de Entrega: 03/11/2026
+// Fecha de Entrega: 07/11/2026
 // NCuenta: 31919948-8
 
 #include <iostream>
 #include <cmath>
+#include <fstream>
 
 // GLEW
 #include <GL/glew.h>
@@ -121,7 +122,7 @@ float FRightLeg = 0.0f;
 float dogPosX , dogPosY , dogPosZ  ;
 
 #define MAX_FRAMES 20
-int i_max_steps = 600;
+int i_max_steps = 800;
 int i_curr_steps = 0;
 typedef struct _frame {
 	
@@ -221,7 +222,7 @@ int main()
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);*/
 
 	// Create a GLFWwindow object that we can use for GLFW's functions
-	GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "Previo #12 Garces Hernandez Luis AngelAnimacion KeyFrames", nullptr, nullptr);
+	GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "Practica #12 Garces Hernandez Luis Angel Animacion KeyFrames", nullptr, nullptr);
 
 	if (nullptr == window)
 	{
@@ -297,6 +298,48 @@ int main()
 		KeyFrame[i].rotSitInc = 0;
 	}
 
+
+	// Cargar keyframes desde el archivo
+	{
+		std::ifstream archivo("AnimacionPerro.txt");
+
+		if (archivo.is_open()) {
+			int cantidad = 0;
+			archivo >> cantidad;
+
+			if (cantidad > 0 && cantidad <= MAX_FRAMES) {
+				bool lecturaCorrecta = true;
+
+				for (int i = 0; i < cantidad; i++) {
+					if (!(archivo >> KeyFrame[i].dogPosX
+						>> KeyFrame[i].dogPosY
+						>> KeyFrame[i].dogPosZ
+						>> KeyFrame[i].rotDog
+						>> KeyFrame[i].head
+						>> KeyFrame[i].FLegs
+						>> KeyFrame[i].FRightLeg
+						>> KeyFrame[i].RLegs
+						>> KeyFrame[i].tail
+						>> KeyFrame[i].rotSit)) {
+						lecturaCorrecta = false;
+						break;
+					}
+				}
+
+				if (lecturaCorrecta) {
+					FrameIndex = cantidad;
+					playIndex = 0;
+					resetElements();
+
+					std::cout << "Se cargaron "
+						<< FrameIndex
+						<< " keyframes." << std::endl;
+				}
+			}
+
+			archivo.close();
+		}
+	}
 
 	// First, set the container's VAO (and VBO)
 	GLuint VBO, VAO,EBO;
@@ -514,8 +557,6 @@ int main()
 		glfwSwapBuffers(window);
 	}
 
-	
-	
 
 	// Terminate GLFW, clearing any resources allocated by GLFW.
 	glfwTerminate();
@@ -574,22 +615,22 @@ void DoMovement()
 			
 	if (keys[GLFW_KEY_H])
 	{
-		dogPosZ += 0.3f;
+		dogPosZ += 0.005f;
 	}
 
 	if (keys[GLFW_KEY_Y])
 	{
-		dogPosZ -= 0.3f;
+		dogPosZ -= 0.005f;
 	}
 
 	if (keys[GLFW_KEY_G])
 	{
-		dogPosX -= 0.3f;
+		dogPosX -= 0.005f;
 	}
 
 	if (keys[GLFW_KEY_J])
 	{
-		dogPosX += 0.3f;
+		dogPosX += 0.005f;
 	}
 
 	// Patas delanteras
@@ -686,18 +727,18 @@ void DoMovement()
 void KeyCallback(GLFWwindow *window, int key, int scancode, int action, int mode)
 {
 
-	if (keys[GLFW_KEY_L])
+	if (key == GLFW_KEY_L && action == GLFW_PRESS)
 	{
 		if (play == false && (FrameIndex > 1))
 		{
 
+			playIndex = 0;
+			i_curr_steps = 0;
+
 			resetElements();
-			//First Interpolation				
 			interpolation();
 
 			play = true;
-			playIndex = 0;
-			i_curr_steps = 0;
 		}
 		else
 		{
@@ -706,7 +747,7 @@ void KeyCallback(GLFWwindow *window, int key, int scancode, int action, int mode
 
 	}
 
-	if (keys[GLFW_KEY_K])
+	if (key == GLFW_KEY_K && action == GLFW_PRESS)
 	{
 		if (FrameIndex < MAX_FRAMES)
 		{
@@ -714,6 +755,77 @@ void KeyCallback(GLFWwindow *window, int key, int scancode, int action, int mode
 		}
 
 	}
+
+	if (key == GLFW_KEY_M && action == GLFW_PRESS)
+	{
+		if (FrameIndex > 0)
+		{
+			std::ofstream archivo("AnimacionPerro.txt");
+
+			if (archivo.is_open())
+			{
+				archivo.precision(9);
+				archivo << FrameIndex << '\n';
+
+				for (int i = 0; i < FrameIndex; i++)
+				{
+					archivo << KeyFrame[i].dogPosX << " "
+						<< KeyFrame[i].dogPosY << " "
+						<< KeyFrame[i].dogPosZ << " "
+						<< KeyFrame[i].rotDog << " "
+						<< KeyFrame[i].head << " "
+						<< KeyFrame[i].FLegs << " "
+						<< KeyFrame[i].FRightLeg << " "
+						<< KeyFrame[i].RLegs << " "
+						<< KeyFrame[i].tail << " "
+						<< KeyFrame[i].rotSit << '\n';
+				}
+
+				archivo.close();
+
+				std::cout << "Animacion guardada: "
+					<< FrameIndex
+					<< " keyframes" << std::endl;
+			}
+			else
+			{
+				std::cout << "Error al guardar la animacion" << std::endl;
+			}
+		}
+		else
+		{
+			std::cout << "No hay keyframes para guardar" << std::endl;
+		}
+	}
+
+	if (key == GLFW_KEY_R && action == GLFW_PRESS)
+	{
+		play = false;
+		FrameIndex = 0;
+		playIndex = 0;
+		i_curr_steps = 0;
+
+		for (int i = 0; i < MAX_FRAMES; i++)
+		{
+			KeyFrame[i] = FRAME{};
+		}
+
+		dogPosX = 0.0f;
+		dogPosY = 0.0f;
+		dogPosZ = 0.0f;
+		rotDog = 0.0f;
+		rotSit = 0.0f;
+		head = 0.0f;
+		FLegs = 0.0f;
+		FRightLeg = 0.0f;
+		RLegs = 0.0f;
+		tail = 0.0f;
+
+		std::cout << "Memoria reiniciada. Nueva animacion."
+			<< std::endl;
+	}
+
+
 
 
 
